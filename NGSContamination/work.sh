@@ -9,7 +9,7 @@ perl extract_random_subset_fasta.pl --input <fastq files> --prefix <prefix strin
 
 ###3. BLASTX and obtain the best hit
 sh blast.sh <fasta file>
-sort -k1,1 -k12,12nr -k11,11n Random.10k.P1_20000.fq.nt.blastn | sort -u -k1,1 --merge > Random.10k.P1_20000.Best
+sort -k1,1 -k12,12gr -k11,11g -k3,3gr Random.10k.P1_20000.fq.nt.blastn | sort -u -k1,1 --merge > Random.10k.P1_20000.Best
 
 ###4. From GI to Taxi_ID
 awk 'BEGIN {FS="\t"} {print $2}' | sed 's/gi|\([0-9]*\)|.*/\1/' >Id.txt
