@@ -9,6 +9,8 @@ perl extract_random_subset_fasta.pl --input <fastq files> --prefix <prefix strin
 
 ###3. BLASTX and obtain the best hit
 sh blast.sh <fasta file>
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8 ##To make sure locale settings recognize "." as a decimal separator
 sort -k1,1 -k12,12gr -k11,11g -k3,3gr Random.10k.P1_20000.fq.nt.blastn | sort -u -k1,1 --merge > Random.10k.P1_20000.Best
 
 ###4. From GI to Taxi_ID
