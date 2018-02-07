@@ -37,7 +37,7 @@ list.close()
 inFasta=open(args.fasta,'rU') #open the fasta file
 for record in SeqIO.parse(inFasta,'fasta'):
     id=re.sub(r'\s.*$','',record.id)
-    if(id in chrs):
+    if key,_ in ids.items():
         for(key in ids):
             if(ids[key]["chr"] == id):
                 fw.write(">" + id + "\n")
