@@ -1,4 +1,5 @@
 ###BLAST Results
+#https://www.biostars.org/p/10959/
 From GI to Taxid
 
 for ACC in A00002 X53307 BB145968 CAA42669 V00181  AH002406  HQ844023

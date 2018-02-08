@@ -1,0 +1,4 @@
+#assgin color to ls
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+alias ls='ls -G'
+

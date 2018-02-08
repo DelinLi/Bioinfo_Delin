@@ -1,0 +1,56 @@
+###BLAST Results
+From GI to Taxid
+
+for ACC in A00002 X53307 BB145968 CAA42669 V00181  AH002406  HQ844023
+do
+   echo -n -e "$ACC\t"
+   curl -s "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${ACC}&rettype=fasta&retmode=xml" |\
+   grep TSeq_taxid |\
+   cut -d '>' -f 2 |\
+   cut -d '<' -f 1 |\
+   tr -d "\n"
+   echo
+ done
+
+
+###Reason
+$ curl "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=HQ844023&rettype=fasta&retmode=xml" 
+
+ http://www.ncbi.nlm.nih.gov/dtd/NCBI_TSeq.dtd">
+ <TSeqSet>
+<TSeq>
+  <TSeq_seqtype value="nucleotide"/>
+  <TSeq_gi>341832806</TSeq_gi>
+  <TSeq_accver>HQ844023.1</TSeq_accver>
+  <TSeq_taxid>1056490</TSeq_taxid>
+  <TSeq_orgname>Rotavirus A HC91xUK reassortant (UKg9KC-1)</TSeq_orgname>
+  <TSeq_defline>Rotavirus A HC91xUK reassortant (UKg9KC-1) NSP3 protein gene, complete cds</TSeq_defline>
+  <TSeq_length>942</TSeq_length>
+  <TSeq_sequence>(...)</TSeq_sequence>
+</TSeq>
+
+</TSeqSet>
+
+Susceptibles Inoculated 11 weeks
+
+
+I ID 0 0 1 1 10 10 102 102 103 103 107 107 109 109 11 11 110 110 111 111 112 112 114 114 115 115 116 116 117 117 118 118 119 119 12 12 120 120 121 121 122 122 123 123 124 124 125 125 127 127 129 
+M Adur1560_2-6306 A A A T A A A A A A A A A A A A A A A A A A A A A A A A A T A A A A T A A A A A A A A A A A T A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A
+M Adur1560_2-6307 G G G A G G G G G G G G G G G G G G G G G G G G G G G G G A G G G G A G G G G G G G G G G G A G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G
+M Adur1560_2-6327 G G G G G G G G G G G G G G G G G G G G T T G G G G G G G G G G G G G G G G T T G T G G G G G G G G G G G G G G G G G G G G G G G G G G G T G G G G G G G G G G G G G G G G G G G
+M Adur1560_2-6343 A A A A A A A A A A A A A A A A A A A A A A A A A A T A A A A A A A A A A A A A A A A A A A A A A A A A T A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A
+M Adur1560_2-6358 C C C C C C T C C C C C C C C C C C C C C C C C T C C C C C C C T T C C C C C C C C C C C T C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C T C C C C C C C C C C C
+M Adur1560_2-7062 A A G G G A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A
+M Adur1560_2-7072 A A A A A A A A A A A A A A A G A A A G A A A A A G A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A G A A A A A A A A A A A A A A A A A A A A A A G A A A A A A A A
+M Adur1560_2-7082 C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C
+M Adur1560_2-7083 A A A A A A A A A A A A A A A A A A A C A A A A A A A A A A A A C C A A A A A A C A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A C A A A A A A A A
+M Adur1560_2-7112 A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A G A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A
+M Adur1560_2-7118 G G G G G G G G G G G G G G G A G G G A G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G A G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G G
+M Adur1560_2-7121 T T A A A T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T
+M Adur1560_2-7129 A A A A A A A A A A A A A A A G A A A G A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A G A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A
+
+for file in `ls *.phased `
+do
+	Chr=`echo $file | sed 's/.phased//'
+	perl ID_fa.pl -id Peanut.LMD30.SNPInfor.txt -data $file > $Chr
+done

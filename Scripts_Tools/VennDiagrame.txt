@@ -1,0 +1,26 @@
+####
+library(VennDiagram)
+
+venn.diagram(list("ATG7"= Data$GeneID[!is.na( Data$atg7_d_atg7_w.sig ) & Data$atg7_d_atg7_w.sig== "yes"],
+                  "BSE1"=Data$GeneID[!is.na( Data$bes1_d_bes1_w.sig ) & Data$bes1_d_bes1_w.sig== "yes"], 
+                  "BIP5"= Data$GeneID[!is.na(Data$bip5_d_bip5_w.sig) & Data$bip5_d_bip5_w.sig == "yes"],
+                  "BRI" =Data$GeneID[!is.na(Data$bri1_d_bri1_w.sig) & Data$bri1_d_bri1_w.sig == "yes"],
+                  "WT"= Data$GeneID[!is.na(Data$wt_d_wt_w.sig) & Data$wt_d_wt_w.sig == "yes"]) , margin = 0.01,
+             fill=c("red","blue","yellow","green","brown"),    height = 3000, width =3000,cat.cex = 1.2, showSetLogicLabel=T,
+             alpha=c(0.5,0.5,0.5,0.5,0.5), cex=1.5, cat.fontface=4, fontfamily=3, filename="figures/Dehydration.DEGs.project01.tiff")
+
+venn.diagram(list("Day 10"=DEGs$GeneID[!is.na(DEGs$ASAG7_ASAG3.sig) & DEGs$ASAG7_ASAG3.sig== "yes"],
+                  "Day 17 "=(DEGs.d17$GeneID[!is.na(DEGs.d17$ASAG8_ASAG4.sig) & DEGs.d17$ASAG8_ASAG4.sig == "yes"]), 
+                  "Day 24"= (DEGs.d24$GeneID[!is.na(DEGs.d24$ASAG9_ASAG5.sig) & DEGs.d24$ASAG9_ASAG5.sig == "yes"]),
+                  "Day 31" =(DEGs.d31$GeneID[!is.na(DEGs.d31$ASAG10_ASAG6.sig) & DEGs.d31$ASAG10_ASAG6.sig == "yes"]),
+                  "Time"=res$GeneID[!is.na(res$DEG.Sig) & res$DEG.Sig=="yes"]),margin = 0.05,
+             fill=c("red","blue","yellow","green","brown"),   height = 5000, width = 6000,cat.cex = 1.5, 
+             alpha=c(0.5,0.5,0.5,0.5,0.5), cex=2, cat.fontface=4, fontfamily=3, filename="figures/DEGs.TimeSeries.and.FourTimePoint.VennDiagram.tiff")
+
+venn.diagram(list("Day 10"=DEGs$GeneID[!is.na(DEGs$ASAG7_ASAG3.sig) & DEGs$ASAG7_ASAG3.sig== "yes"],
+                  "Day 17 "=(DEGs.d17$GeneID[!is.na(DEGs.d17$ASAG8_ASAG4.sig) & DEGs.d17$ASAG8_ASAG4.sig == "yes"]), 
+                  "Day 24"= (DEGs.d24$GeneID[!is.na(DEGs.d24$ASAG9_ASAG5.sig) & DEGs.d24$ASAG9_ASAG5.sig == "yes"]),
+                  "Day 31" =(DEGs.d31$GeneID[!is.na(DEGs.d31$ASAG10_ASAG6.sig) & DEGs.d31$ASAG10_ASAG6.sig == "yes"]),
+                  "Time"=res$GeneID[!is.na(res$DEG.Sig) & res$DEG.Sig=="yes"]), margin = 0.05,
+             fill=c("red","blue","yellow","green","brown"),   height = 5000, width = 6000,cat.cex = 1.5, 
+             alpha=c(0.5,0.5,0.5,0.5,0.5), cex=2, cat.fontface=4, fontfamily=3, filename="figures/DEGs.TimeSeries.and.FourTimePoints.VennDiagram.tiff")
