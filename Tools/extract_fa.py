@@ -42,7 +42,7 @@ for record in SeqIO.parse(inFasta,'fasta'):
         print(id_tem)
         for key,_ in ids.items():
             if(ids[key]["chr"] == id_tem):
-                fw.write(">" + id_tem + "\n")
+                fw.write(">" + key + "\n")
                 start=int(ids[key]["start"])-1
                 end=int(ids[key]["end"])
                 fw.write(str(record.seq)[start:end]+"\n")
