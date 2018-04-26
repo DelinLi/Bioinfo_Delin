@@ -55,7 +55,7 @@ else:
     for record in SeqIO.parse(inFasta, 'fasta'):
         id_tem = re.sub(r'\s.*$', '', record.id)
         if id_tem in chrs:
-            #print(id_tem)
+            del chrs[id_tem]
             fw.write(">" + id_tem + "\n")
             fw.write(str(record.seq) + "\n")
 
