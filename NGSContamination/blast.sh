@@ -18,6 +18,7 @@ else
 	output="$input"."$db".blastn
 
 	time -v -o "$input"."$db".blastn.resources \
-        blastn -db "$dbpath"/"$db" -query "$input" -out "$output" -evalue "$evalue" -show_gis -num_threads "$proc" -outfmt "6 qseqid sseqid pident qlen length mismatch gapope evalue bitscore" -max_target_seqs 1
+        blastn -db "$dbpath"/"$db" -query "$input" -out "$output" -evalue "$evalue" -show_gis -num_threads "$proc" -outfmt "6 qseqid sseqid pident qlen length mismatch gapope evalue bitscore" 
+        # -max_target_seqs 1     --- https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/bty833/5106166?redirectedFrom=fulltext
 	#			-num_alignments "$hits" -num_descriptions "$hits" -num_threads "$proc" -outfmt 6 # -max_target_seqs 1
 fi
