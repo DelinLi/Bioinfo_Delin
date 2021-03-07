@@ -15,7 +15,7 @@ if(cur_version<version):
 # Taking command line arguments from users
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--fasta', help='fasta file path', type=str, required=True)
-parser.add_argument('-l', '--list', help='four column list input file to extract', type=str, required=False)
+parser.add_argument('-l', '--list', help='one / four column list input file to extract', type=str, required=False)
 parser.add_argument('-o', '--output', help='output file', type=str, required=True )
 args = parser.parse_args()
 
@@ -25,26 +25,38 @@ fw=open(args.output,'w') #open the output file
 listF=open(args.list,'rU')
 ids=dict() #creat a dict to store the list: id: information(start end )
 chrs={}
+ColNum4=True
 for row in listF:
     rows=row.split("\t")
-    ids[rows[0]]={}
-    ids[rows[0]]["chr"] = rows[1]
-    ids[rows[0]]["start"] = rows[2]
-    ids[rows[0]]["end"] = rows[3]
-    chrs[rows[1]]=1
+    if(len(rows)==1):
+        ColNum4=False
+        chrs[rows[0].strip()] = 1
+    else:
+        ids[rows[0]]={}
+        ids[rows[0]]["chr"] = rows[1]
+        ids[rows[0]]["start"] = rows[2]
+        ids[rows[0]]["end"] = rows[3].strip()
+        chrs[rows[1]]=1
 
 listF.close()
 # read in the fasta file and extract & output them
 inFasta=open(args.fasta,'rU') #open the fasta file
-for record in SeqIO.parse(inFasta,'fasta'):
-    id_tem=re.sub(r'\s.*$','',record.id)
-    if id_tem in chrs:
-        print(id_tem)
-        for key,_ in ids.items():
-            if(ids[key]["chr"] == id_tem):
-                fw.write(">" + id_tem + "\n")
-                start=int(ids[key]["start"])-1
-                end=int(ids[key]["end"])
-                fw.write(str(record.seq)[start:end]+"\n")
+if(ColNum4):
+    for record in SeqIO.parse(inFasta, 'fasta'):
+        id_tem = re.sub(r'\s.*$', '', record.id)
+        if id_tem in chrs:
+            for key, _ in ids.items():
+                if (ids[key]["chr"] == id_tem):
+                    fw.write(">" + key + "\n")
+                    start = int(ids[key]["start"]) - 1
+                    end = int(ids[key]["end"])
+                    fw.write(str(record.seq)[start:end] + "\n")
+else:
+    for record in SeqIO.parse(inFasta, 'fasta'):
+        id_tem = re.sub(r'\s.*$', '', record.id)
+        if id_tem in chrs:
+            del chrs[id_tem]
+            fw.write(">" + id_tem + "\n")
+            fw.write(str(record.seq) + "\n")
 
 fw.close() # close output file handle
